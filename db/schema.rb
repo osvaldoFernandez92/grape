@@ -25,14 +25,4 @@ ActiveRecord::Schema.define(version: 20170213193136) do
     t.string   "name"
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "tags", ["song_id"], name: "index_tags_on_song_id", using: :btree
-
-  add_foreign_key "tags", "songs"
 end

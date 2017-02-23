@@ -7,26 +7,19 @@ table
       th Title
 
   tbody
-    div id='songs' data-songs=@songs_hash 
     - @songs.each do |song|
-      tr 
-        td
-          = song.name
-        td
-          = content_tag "div", id: song.id, data: {url: song.url}
+      = form_for(song) do |f|
+        tr 
+          td
+            = song.name
+          td
             = song.url
-        td
-          - if song.artist.present?
-            = song.artist
-          - else
-            div id='artist-#{song.id}'
-              input class="typeahead" type="text" placeholder="Artist"
-        td
-          - if song.title.present?
-            = song.title
-          - else
-            div id='title-#{song.id}'
-              input class="typeahead" type="text" placeholder="Title"
+          td
+            = f.text_field :artist
+          td
+            = f.text_field :title
+          td
+            = f.submit
 
 button onclick="submitSongs()"
   | Save info

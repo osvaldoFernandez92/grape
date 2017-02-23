@@ -6,14 +6,18 @@ class SongsController < ApplicationController
 	def create
 		@song = Song.new(song_params)
 	  @song.save
-	  create_tags(@song)
+	  update_name(@song)
 	  redirect_to songs_path
 	end
 
 	def index
 		@songs = Song.all
-    @songs_hash = @songs.map{ |song| serialize_song(song) }
 	end
+
+  def update
+    Song.find(params[:id]).update_attributes(title: params[:song][:title], artist: params[:song][:artist])
+    redirect_to songs_path
+  end
 
   def multisong_update
     update_songs if multisong_params.present?
@@ -29,11 +33,6 @@ private
     end
   end
 
-  def serialize_song(song)
-    song.as_json.merge(tags: song.tags).to_json
-  end
-
-
   def song_params
     params.require(:song).permit(:title, :artist, :url)
   end
@@ -42,14 +41,10 @@ private
     JSON.parse(params.require(:songs))
   end
 
-  def create_tags(song)
+  def update_name(song)
   	id = trim_url(song.url)
   	resp = JSON.parse(HTTP.get(request_url_str(id)))
     song.update_attributes(name: resp['items'][0]['snippet']['title'])
-    return unless resp['items'][0]['snippet']['tags'].present?
-  	resp['items'][0]['snippet']['tags'].each do |tagname|
-  		Tag.create(name: tagname, song: song)
-  	end
   end
 
   def trim_url(url)
