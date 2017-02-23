@@ -38,6 +38,8 @@ gem 'twitter-bootstrap-rails'
 
 gem 'twitter-typeahead-rails'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
