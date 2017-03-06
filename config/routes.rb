@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :songs do
     collection do
-      post :multisong_update
+      get :script
+      post :mark_downloaded
     end
   end
 

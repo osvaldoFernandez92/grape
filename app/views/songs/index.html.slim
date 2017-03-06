@@ -21,8 +21,9 @@ table
           td
             = f.submit
 
-button onclick="submitSongs()"
-  | Save info
+= link_to "Generate script", script_songs_path
+
+= button_to "Mark as downloaded", mark_downloaded_songs_path
 
 
           

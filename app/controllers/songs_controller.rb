@@ -11,7 +11,7 @@ class SongsController < ApplicationController
 	end
 
 	def index
-		@songs = Song.all
+		@songs = Song.where(downloaded: false)
 	end
 
   def update
@@ -19,26 +19,18 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
-  def multisong_update
-    update_songs if multisong_params.present?
-    render status: :ok, nothing: true
+  def script
+    @songs = Song.where(downloaded: false)
+  end
+
+  def mark_downloaded 
+    Song.where(downloaded: false).update_all(downloaded: true)
+    redirect_to songs_path
   end
 
 private
-  def update_songs
-    multisong_params.each do |song| 
-      stored_song = Song.find(song['id'])
-      stored_song.update_attributes(artist: song['artist']) if song['artist'].present? 
-      stored_song.update_attributes(title: song['title']) if song['title'].present? 
-    end
-  end
-
   def song_params
     params.require(:song).permit(:title, :artist, :url)
-  end
-
-  def multisong_params
-    JSON.parse(params.require(:songs))
   end
 
   def update_name(song)

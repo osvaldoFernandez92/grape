@@ -1,0 +1,68 @@
+| #!/bin/bash
+br
+| #Uva script
+br
+|
+br 
+| audio () {
+br 	
+| 	echo “”
+br 
+| 	mkdir -p /home/osvaldo/Música/tmp;
+br 
+| 	cd /home/osvaldo/Música/tmp/
+br 
+| 	echo “Downloading auido mp3 128kbps”
+br 
+| 	echo "$1" "$2" "$3"
+br 
+|         echo "$2" - "$3" 
+br 
+|
+br 
+|         youtube-dl --extract-audio --audio-format mp3 -o "$2 - $3.%(ext)s" --audio-quality 128K $1
+br 
+|         mp3info -d "$2 - $3.mp3" 
+br 
+| 	mp3info -t "$3" -a "$2" "$2 - $3.mp3"
+br 
+| } 
+br 
+| 
+br 
+| artists=(
+- @songs.each do |song|
+  br
+  = "'#{song.artist}'"
+br 
+| )
+br 
+| 
+br 
+| titles=(
+- @songs.each do |song|
+  br
+  = "'#{song.title}'"
+br 
+| )
+br 
+| 
+br 
+| urls=(
+- @songs.each do |song|
+  br
+  = "'#{song.url}'"
+br 
+| )
+br 
+| 
+br 
+| 
+br 
+| for i in ${!urls[@]}; do
+br 
+|         echo $i; 
+br 
+| 	audio "${urls[$i]}" "${artists[$i]}" "${titles[$i]}" ; 
+br 
+| done
