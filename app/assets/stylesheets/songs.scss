@@ -1,3 +1,110 @@
 // Place all the styles related to the Songs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.title-bar {
+	height: 50px;
+	width: 100%;
+	background-color: #603CBA;
+	color: white;
+	text-align: center;
+	font-size: 30px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.sidebar {
+	height: calc(100vh - 50px);
+	width: 160px;
+	background-color: #3A3A3A;
+
+	ul {
+		list-style-type: none;
+		padding: 20px 0;
+
+		li {
+      cursor: pointer;
+      padding: 5px 20px;
+
+			&:hover {
+				background-color: #575757;
+
+			}
+
+			a {
+				color: #B2B2B2;
+				font-size: 15px;
+				font-family: 'Montserrat', sans-serif;
+				text-decoration: none; 
+
+			}
+		}
+	} 
+}
+
+.main {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.content {
+	padding: 30px;
+}
+
+.pending-songs-table {
+	max-width: calc(100vw - 30px - 30px - 160px);
+	display: block;
+	overflow-x: scroll;
+	font-family: 'Montserrat', sans-serif;
+
+	th {
+		font-size: 15px;
+		background-color: #3A3A3A;
+		color: #B2B2B2;
+	}
+	
+	tr:nth-child(even) {
+    background-color: #EEE;
+	}
+
+	.st-url, .st-artist, .st-title {
+		max-width: 125px;
+		overflow: hidden;
+		padding: 0 5px;
+
+		input {
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid black;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+
+	.st-submit {
+
+		padding: 1px 5px;
+
+		input {
+			width: 100px;
+			background-color: #603CBA;
+			border: none;
+			padding: 2px 12px;
+		}
+	}
+
+	.st-name {
+		max-width: 250px;
+		overflow: hidden;
+		white-space: nowrap;
+	  text-overflow: ellipsis;
+		padding: 0 5px;
+	}
+
+	.st-url {
+	  white-space: nowrap;
+	  text-overflow: ellipsis;
+	}
+}

@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Grape
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" /
+  body
+    .title-bar
+      | Grape
+    .main
+	    .sidebar
+          ul 
+            li 
+              = link_to "New song", new_song_path
+            li
+              = link_to "Pending songs", songs_path
+            li
+              = link_to "Script", script_songs_path
+	    .content
+	      = yield

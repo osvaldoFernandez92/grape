@@ -1,27 +1,30 @@
-table
+table.pending-songs-table
   thead
     tr
-      th Youtube name
-      th URL
-      th Artist
-      th Title
+      th.st-url
+        | URL
+      th.st-name
+        | Youtube name
+      th.st-artist
+        | Artist
+      th.st-title
+        | Title
+      th.submit
 
   tbody
     - @songs.each do |song|
       = form_for(song) do |f|
         tr 
-          td
-            = song.name
-          td
+          td.st-url(title=song.url)
             = song.url
-          td
+          td.st-name
+            = song.name
+          td.st-artist
             = f.text_field :artist
-          td
+          td.st-title
             = f.text_field :title
-          td
-            = f.submit
-
-= link_to "Generate script", script_songs_path
+          td.st-submit
+            = f.submit "Update", class: 'btn btn-primary'
 
 = button_to "Mark as downloaded", mark_downloaded_songs_path
 
